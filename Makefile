@@ -16,9 +16,9 @@ APP = Application
 APPJR = Application.jar
 APPCL = Application.class
 AGG = Aggregator.class
-NET = WebClient.class
+NET = networking/WebClient.class
 CLASSES = 	WebServer.java \
-		WebClient.java \
+		networking/WebClient.java \
 		Application.java \
 		Aggregator.java
 

@@ -1,6 +1,4 @@
 // Código Java para probar la serialización y deserialización con ayuda de la clase SerializationUtils.java
-package cliente;
-
 import java.io.*;
 
 class Demo implements java.io.Serializable

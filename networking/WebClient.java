@@ -21,7 +21,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-package cliente.networking;
+package networking;
 
 import java.net.URI;
 import java.net.http.HttpClient;

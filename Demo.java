@@ -1,5 +1,3 @@
-package cliente;
-
 import java.io.Serializable;
 
 public class Demo implements java.io.Serializable{

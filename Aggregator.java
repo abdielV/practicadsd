@@ -21,12 +21,13 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-package cliente;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import networking.WebClient;
 
 public class Aggregator {
     private WebClient webClient; //Objeto webclient (Solo lo tenemos como dato)
