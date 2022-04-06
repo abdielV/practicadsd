@@ -24,18 +24,14 @@
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 public class Application {
     private static final String WORKER_ADDRESS_1 = "http://localhost:8080/task";
 
     public static void main(String[] args) {
         Aggregator aggregator = new Aggregator();
-        PoligonoIrreg poligono = new PoligonoIrreg();
-	poligono.anadeVertice(new Coordenada(aleatorio.nextInt(), aleatorio.nextInt()));
-	poligono.anadeVertice(new Coordenada(aleatorio.nextInt(), aleatorio.nextInt()));
-	poligono.anadeVertice(new Coordenada(aleatorio.nextInt(), aleatorio.nextInt()));
-	System.out.println("Poligono: \n" + poligono);
+        Demo obj = new Demo(2022, "Prueba serializacion y deserializacion");
+        obj.imprimirObjeto();
         byte[] objserial = SerializationUtils.serialize(obj);
 
         
