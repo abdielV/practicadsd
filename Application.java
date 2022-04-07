@@ -33,12 +33,18 @@ public class Application {
         Demo obj = new Demo(2022, "Prueba serializacion y deserializacion");
         obj.imprimirObjeto();
         byte[] objserial = SerializationUtils.serialize(obj);
+	System.out.println(objserial);
 
         
-        List<String> results = aggregator.sendTasksToWorkers(Arrays.asList(WORKER_ADDRESS_1),objserial);
+        List<byte[]> results = aggregator.sendTasksToWorkers(Arrays.asList(WORKER_ADDRESS_1),objserial);
 
-        for (String result : results) {
-            System.out.println(result);
+        /*for (byte[] result : results) {
+            System.out.print(result);
         }
+	System.out.println();*/
+	if(SerializationUtils.deserialize(results.get(0)) instanceof Demo)
+		System.out.println("Si soy Demo");
+	else
+		System.out.println("No soy Demo");
     }
 }

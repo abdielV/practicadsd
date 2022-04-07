@@ -158,6 +158,8 @@ public class WebServer {
         byte[] requestBytes = exchange.getRequestBody().readAllBytes(); //almacenan los datos enviados
         byte[] responseBytes=null;
         showObject(requestBytes);
+	System.out.println(requestBytes);
+
 
         long finishTime = System.nanoTime();
 
@@ -168,7 +170,8 @@ public class WebServer {
             byte[] timeBytes = String.format("La operacion tomo %d nanosegundos", finishTime - startTime).getBytes();
             outputStream.write(timeBytes);
             responseBytes = outputStream.toByteArray();
-            sendResponse(responseBytes, exchange); //se envia respuesta    
+            responseBytes = requestBytes; // los cambios están aquí
+	    sendResponse(responseBytes, exchange); //se envia respuesta    
         }
         
     }

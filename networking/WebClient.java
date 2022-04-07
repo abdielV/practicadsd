@@ -38,14 +38,14 @@ public class WebClient {
                 .build();
     }
 
-    public CompletableFuture<String> sendTask(String url, byte[] requestPayload) { //Metodo recibe la direccion de la conexion y los datos a enviar
+    public CompletableFuture<byte[]> sendTask(String url, byte[] requestPayload) { //Metodo recibe la direccion de la conexion y los datos a enviar
         HttpRequest request = HttpRequest.newBuilder()//Crea una solicitud
                 .POST(HttpRequest.BodyPublishers.ofByteArray(requestPayload))//Metodo post
                 .uri(URI.create(url))//Dirreccion de destino 
 		.header("X-Debug", "true")// *** Cabecera de depurado, obtener tiempo de transmisión" ***
                 .build();
 
-        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())//Llamamos al metodo sendAsync para enviar la solicitud request (de forma asincrona)
-                .thenApply(respuesta -> {return respuesta.body() + "Cabeceras: " + respuesta.headers() + "\nVersión de HTML: " + respuesta.version() + "\nURI: " + respuesta.uri() + "\n";}); //  *** Recibe la respuesta del cuerpo, luego de los headers, versión html y uri. ***
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofByteArray())//Llamamos al metodo sendAsync para enviar la solicitud request (de forma asincrona)
+                .thenApply(respuesta -> {return respuesta.body();}); //  *** Recibe la respuesta del cuerpo, luego de los headers, versión html y uri. ***
     }
 }

@@ -36,8 +36,8 @@ public class Aggregator {
         this.webClient = new WebClient();//Instancia de nuestro webclient
     }
 
-    public List<String> sendTasksToWorkers(List<String> workersAddresses, byte[] task) {//Metodo (unico) "sendTasksToWorkers", sirve para que se reciba la lista de los trabajadores y tareas
-        CompletableFuture<String>[] futures = new CompletableFuture[workersAddresses.size()];//Empleamos la clase CompletableFuture. para el manejo de la comunicacion asincrona
+    public List<byte[]> sendTasksToWorkers(List<String> workersAddresses, byte[] task) {//Metodo (unico) "sendTasksToWorkers", sirve para que se reciba la lista de los trabajadores y tareas
+        CompletableFuture<byte[]>[] futures = new CompletableFuture[workersAddresses.size()];//Empleamos la clase CompletableFuture. para el manejo de la comunicacion asincrona
 	//Permitiendo continuar con la ejecucion de codigo bloqueante. En el arreglo se guardaran las respuestas futuras de los dos servidores
         for (int i = 0; i < workersAddresses.size(); i++) {//iteramos sobre todos los elementos
             String workerAddress = workersAddresses.get(i);//Obtencion de las direcciones de los trabajadores
@@ -48,7 +48,7 @@ public class Aggregator {
             futures[i] = webClient.sendTask(workerAddress, requestPayload);//Enviamos las tareas asincronas (usanod sendtask)
         }
 
-        List<String> results = Stream.of(futures).map(CompletableFuture::join).collect(Collectors.toList());//Declaramos lista de resultados
+        List<byte[]> results = Stream.of(futures).map(CompletableFuture::join).collect(Collectors.toList());//Declaramos lista de resultados
 
         return results;
     }
