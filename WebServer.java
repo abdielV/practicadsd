@@ -158,12 +158,11 @@ public class WebServer {
         byte[] requestBytes = exchange.getRequestBody().readAllBytes(); //almacenan los datos enviados
         byte[] responseBytes=null;
         showObject(requestBytes);
-	System.out.println(requestBytes);
 
 
         long finishTime = System.nanoTime();
-
-        if (isDebugMode) {
+	sendResponse(requestBytes, exchange);
+       /* if (isDebugMode) {
             String debugMessage = String.format("La operación tomó %d nanosegundos", finishTime - startTime); //calcula tiempo 
             exchange.getResponseHeaders().put("X-Debug-Info", Arrays.asList(debugMessage)); //se almacena respuesta en el header 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -172,7 +171,7 @@ public class WebServer {
             responseBytes = outputStream.toByteArray();
             responseBytes = requestBytes; // **los cambios están aquí**
 	    sendResponse(responseBytes, exchange); //se envia respuesta    
-        }
+        }*/
         
     }
 
