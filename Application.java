@@ -34,12 +34,16 @@ public class Application {
         obj.imprimirObjeto();
         byte[] objserial = SerializationUtils.serialize(obj);
         
-        List<byte[]> results = aggregator.sendTasksToWorkers(Arrays.asList(WORKER_ADDRESS_1),objserial);
-	Demo d = (Demo)SerializationUtils.deserialize(results.get(0));
-	if(d instanceof Demo)
-		System.out.println("Si soy Demo");
-	else
-		System.out.println("No soy Demo");
-	d.imprimirObjeto();
+	List<byte[]> results;
+	while(true){
+        	results = aggregator.sendTasksToWorkers(Arrays.asList(WORKER_ADDRESS_1),objserial);
+		obj = (Demo)SerializationUtils.deserialize(results.get(0));
+		if(obj instanceof Demo)
+			System.out.println("Si soy Demo");
+		else
+			System.out.println("No soy Demo");
+		obj.imprimirObjeto();
+		objserial = SerializationUtils.serialize(obj);
+	}
     }
 }
