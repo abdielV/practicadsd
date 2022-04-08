@@ -24,25 +24,32 @@
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Application {
     private static final String WORKER_ADDRESS_1 = "http://localhost:8080/task";
 
     public static void main(String[] args) {
+	Random random = new Random();
+
         Aggregator aggregator = new Aggregator();
-        Demo obj = new Demo(2022, "Prueba serializacion y deserializacion");
-        obj.imprimirObjeto();
+        PoligonoIrreg obj = new PoligonoIrreg();
+	obj.anadeVertice(new Coordenada(random.nextInt(), random.nextInt()));
+	obj.anadeVertice(new Coordenada(random.nextInt(), random.nextInt()));
+	obj.anadeVertice(new Coordenada(random.nextInt(), random.nextInt()));
+        System.out.println(obj.toString());
         byte[] objserial = SerializationUtils.serialize(obj);
         
 	List<byte[]> results;
 	while(true){
         	results = aggregator.sendTasksToWorkers(Arrays.asList(WORKER_ADDRESS_1),objserial);
-		obj = (Demo)SerializationUtils.deserialize(results.get(0));
-		if(obj instanceof Demo)
+		obj = (PoligonoIrreg)SerializationUtils.deserialize(results.get(0));
+		if(obj instanceof PoligonoIrreg)
 			System.out.println("Si soy Demo");
 		else
 			System.out.println("No soy Demo");
-		obj.imprimirObjeto();
+		obj.anadeVertice(new Coordenada(random.nextInt(), random.nextInt()));
+		System.out.println("Objeto a ser mandado al servidor:\n " + obj);
 		objserial = SerializationUtils.serialize(obj);
 	}
     }

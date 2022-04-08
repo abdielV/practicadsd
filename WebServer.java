@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.Random;
 import java.io.ByteArrayOutputStream;
+
 public class WebServer {
     private static final String TASK_ENDPOINT = "/task"; //endpint task
     private static final String STATUS_ENDPOINT = "/status"; //endpint status
@@ -43,7 +44,11 @@ public class WebServer {
     private final int port; //puerto 
     private HttpServer server; //servidor http
 
+    private static Random random;
+
     public static void main(String[] args) {
+	random = new Random();
+
         int serverPort = 8080;
         if (args.length == 1) {
             serverPort = Integer.parseInt(args[0]); //asignacion de puerto
@@ -156,12 +161,12 @@ public class WebServer {
         long startTime = System.nanoTime();
 
         byte[] requestBytes = exchange.getRequestBody().readAllBytes(); //almacenan los datos enviados
-        byte[] responseBytes=null;
-        showObject(requestBytes);
+        byte[] responseBytes = anadeVertice(requestBytes);
+        // showObject(requestBytes);
 
 
         long finishTime = System.nanoTime();
-	sendResponse(requestBytes, exchange);
+	sendResponse(responseBytes, exchange);
        /* if (isDebugMode) {
             String debugMessage = String.format("La operación tomó %d nanosegundos", finishTime - startTime); //calcula tiempo 
             exchange.getResponseHeaders().put("X-Debug-Info", Arrays.asList(debugMessage)); //se almacena respuesta en el header 
@@ -175,8 +180,15 @@ public class WebServer {
         
     }
 
+	private byte[] anadeVertice(byte[] serial){
+		PoligonoIrreg  obj = (PoligonoIrreg)SerializationUtils.deserialize(serial);
+		obj.anadeVertice(new Coordenada(random.nextInt(), random.nextInt()));
+		System.out.println("Poligono a ser mandado:\n" + obj);
+		return SerializationUtils.serialize(obj);
+	}
+
     private void showObject(byte[] requestBytes){
-        Demo obj = null;
+	Demo obj = null;
         obj = (Demo)SerializationUtils.deserialize(requestBytes);
         System.out.println("Se recibio el objeto con los elementos:");
         System.out.println("a: "+obj.a);

@@ -37,7 +37,7 @@ CLASSES = 	WebServer.java \
 # empleando el sufijo "-cf" para compilar archivo Application
 # NOTA: ES NECESARIO DEJAR EL SALTO DE LÍNEA O MARCA ERROR
 .class.jar:
-	$(JR) $(FLAGS) $(APPJR) $(APPCL) $(AGG) $(NET) Demo.class SerializationUtils.class
+	$(JR) $(FLAGS) $(APPJR) $(APPCL) $(AGG) $(NET) Demo.class SerializationUtils.class PoligonoIrreg.class Coordenada.class
 
 ################################################################################
 # definiendo los comandos posibles de usar por el usuario
