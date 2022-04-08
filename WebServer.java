@@ -170,7 +170,7 @@ public class WebServer {
             byte[] timeBytes = String.format("La operacion tomo %d nanosegundos", finishTime - startTime).getBytes();
             outputStream.write(timeBytes);
             responseBytes = outputStream.toByteArray();
-            responseBytes = requestBytes; // los cambios están aquí
+            responseBytes = requestBytes; // **los cambios están aquí**
 	    sendResponse(responseBytes, exchange); //se envia respuesta    
         }
         
